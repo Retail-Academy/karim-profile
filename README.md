@@ -246,7 +246,7 @@
     <section>
       <h2>Signature Projects</h2>
       <ul>
-        <li><a href="https://vienphan.github.io/karim-nguyenkim/" target="_blank">Nguyễn Kim 2025 Transformation – Omnichannel strategy</a></li>
+        <li><a href="https://retail-academy.github.io/karim-nguyenkim/" target="_blank">Nguyễn Kim 2025 Transformation – Omnichannel strategy</a></li>
         <li>AI-powered brand zones with Samsung, LG, Toshiba, and Sony</li>
         <li>Tops Market rebrand as an upscale urban supermarket</li>
         <li>Casino & WH Smith franchise launches in Qatar</li>
