@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Karim Noui – Digital Business Card</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Digital Business Card of Karim Noui – President of Nguyen Kim – Central Retail Vietnam." />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #050508;
+      --card-bg: #111119;
+      --gold: #d6b46a;
+      --gold-soft: #f2d797;
+      --text-main: #f7f7f7;
+      --text-soft: #c9c9d4;
+      --border-radius-xl: 22px;
+      --shadow-soft: 0 24px 80px rgba(0,0,0,0.7);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #22222f 0, #050508 42%);
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+
+    .card-shell {
+      position: relative;
+      max-width: 420px;
+      width: 100%;
+      border-radius: var(--border-radius-xl);
+      padding: 1px;
+      background: radial-gradient(circle at top left, #f6e3b4 0, #c79e4a 25%, #57391c 60%, #050508 100%);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .card {
+      background: linear-gradient(145deg, #111119 0, #050508 55%, #15151f 100%);
+      border-radius: calc(var(--border-radius-xl) - 1px);
+      padding: 22px 20px 18px;
+    }
+
+    .top-row {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .avatar-wrap {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      padding: 2px;
+      background: radial-gradient(circle at top, #f7e0ac, #b3873c);
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .avatar-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: #020203;
+      overflow: hidden;
+    }
+
+    .avatar-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: translateY(-2px);
+    }
+
+    .name-block { flex: 1; min-width: 0; }
+
+    .name {
+      font-family: "Playfair Display", serif;
+      font-size: 22px;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .title {
+      font-size: 13px;
+      line-height: 1.4;
+      color: var(--gold-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .company {
+      font-size: 12px;
+      margin-top: 4px;
+      color: var(--text-soft);
+    }
+
+    .divider {
+      height: 1px;
+      margin: 12px 0;
+      background: linear-gradient(90deg, transparent, rgba(214,180,106,0.4), transparent);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .info-label {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 10px;
+      color: rgba(242,215,151,0.85);
+      margin-bottom: 2px;
+    }
+
+    .info-value { font-size: 13px; word-break: break-word; }
+
+    .info-link a {
+      color: var(--gold-soft);
+      text-decoration: none;
+    }
+    .info-link a:hover { text-decoration: underline; }
+
+    .btn-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, background 0.12s ease-out;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: radial-gradient(circle at top, #f7e0ac 0, #d2a958 40%, #8b6328 80%);
+      color: #1b1206;
+      box-shadow: 0 8px 22px rgba(0,0,0,0.55);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.02);
+      color: var(--gold-soft);
+      border: 1px solid rgba(230,186,114,0.4);
+      box-shadow: 0 8px 22px rgba(0,0,0,0.4);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.7);
+    }
+
+    .btn:active {
+      transform: translateY(1px) scale(0.99);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+    }
+
+    .btn span.icon { font-size: 14px; }
+
+    .footer {
+      margin-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      color: rgba(200,200,214,0.7);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 18px 16px 14px; }
+      .name { font-size: 20px; }
+      .btn-row { grid-template-columns: minmax(0, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card-shell">
+    <div class="card">
+      <div class="top-row">
+        <div class="avatar-wrap">
+          <div class="avatar-inner">
+            <!-- Ảnh profile của Karim -->
+            <img src="https://raw.githubusercontent.com/Retail-Academy/karim-profile/main/Mr.%20Karim%20Profile%20Pic.jpg" alt="Karim Noui" />
+          </div>
+        </div>
+        <div class="name-block">
+          <div class="name">Karim Noui</div>
+          <div class="title">President</div>
+          <div class="company">Nguyen Kim – Central Retail Vietnam</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="info-grid">
+        <div>
+          <div class="info-label">Mobile</div>
+          <div class="info-value info-link">
+            <a href="tel:+84916027887">(+84) 916 027 887</a>
+          </div>
+        </div>
+        <div>
+          <div class="info-label">Email – Work</div>
+          <div class="info-value info-link">
+            <a href="mailto:karim.noui@vn.centralretail.com">karim.noui@vn.centralretail.com</a>
+          </div>
+        </div>
+        <div>
+          <div class="info-label">Email – Personal</div>
+          <div class="info-value info-link">
+            <a href="mailto:k.noui@outlook.com">k.noui@outlook.com</a>
+          </div>
+        </div>
+        <div>
+          <div class="info-label">LinkedIn</div>
+          <div class="info-value info-link">
+            <a href="https://www.linkedin.com/in/karim-noui-818aaa/" target="_blank" rel="noopener">
+              linkedin.com/in/karim-noui-818aaa
+            </a>
+          </div>
+        </div>
+        <div>
+          <div class="info-label">Leadership Profile</div>
+          <div class="info-value info-link">
+            <a href="https://retail-academy.github.io/karim-profile/" target="_blank" rel="noopener">
+              retail-academy.github.io/karim-profile
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <a class="btn btn-primary" href="tel:+84916027887">
+          <span class="icon">📞</span><span>Call</span>
+        </a>
+        <a class="btn btn-secondary" href="mailto:karim.noui@vn.centralretail.com">
+          <span class="icon">✉️</span><span>Email</span>
+        </a>
+        <a class="btn btn-secondary" href="https://www.linkedin.com/in/karim-noui-818aaa/" target="_blank" rel="noopener">
+          <span class="icon">🔗</span><span>LinkedIn</span>
+        </a>
+        <a class="btn btn-secondary" href="karim-contact.vcf">
+          <span class="icon">💾</span><span>Save Contact</span>
+        </a>
+      </div>
+
+      <div class="footer">
+        <div>Leadership & Transformation</div>
+        <div>Scan QR or tap to connect</div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
