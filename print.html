@@ -3,41 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <title>Karim Noui – Business Card Print</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- PRINT SETUP -->
   <style>
+    /* Print setup: 1 page = 1 side of the card */
     @page {
       size: 85mm 54mm;
       margin: 0;
     }
 
+    html, body {
+      height: 100%;
+    }
+
     body {
       margin: 0;
       padding: 0;
-      background: #111;
-      display: flex;
-      gap: 20mm;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      background: #111; /* only for on-screen preview */
       font-family: "Inter", Arial, sans-serif;
     }
 
+    /* Card base */
     .card {
       width: 85mm;
       height: 54mm;
       background: #050508;
       border-radius: 3mm;
-      position: relative;
       box-sizing: border-box;
       overflow: hidden;
+      position: relative;
+      /* center the card on screen; does not affect printing */
+      margin: 24px auto;
     }
 
-    /* ---------- FRONT ---------- */
+    /* ---------- FRONT (PAGE 1) ---------- */
     .front {
       display: flex;
       justify-content: center;
       align-items: center;
+      page-break-after: always; /* force next page for the back side */
+      break-after: page;        /* modern equivalent */
     }
 
     .qr {
@@ -45,7 +50,7 @@
       height: 32mm;
     }
 
-    /* ---------- BACK ---------- */
+    /* ---------- BACK (PAGE 2) ---------- */
     .back {
       padding: 12mm 10mm;
       display: flex;
@@ -60,36 +65,46 @@
       font-family: "Playfair Display", serif;
       font-size: 9.5pt;
       letter-spacing: 0.25em;
-      margin-bottom: 2mm;
+      text-transform: uppercase;
+      margin: 0 0 2mm 0;
     }
 
     .title {
       font-size: 6.5pt;
       font-weight: 300;
-      margin-bottom: 1.5mm;
+      margin: 0 0 1.5mm 0;
     }
 
     .company {
       font-size: 6pt;
       font-weight: 300;
       opacity: 0.9;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    /* Print: remove preview margins so the card sits exactly on the page */
+    @media print {
+      body {
+        background: transparent;
+      }
+      .card {
+        margin: 0;
+        border-radius: 0; /* optional; many printers ignore rounded corners anyway */
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- FRONT -->
+  <!-- FRONT (Page 1) -->
   <div class="card front">
-    <!-- QR SVG -->
-    <img
-      src="./assets/qr-karim.svg"
-      alt="QR Code"
-      class="qr"
-    />
+    <!-- Put your QR SVG here -->
+    <img src="./assets/qr-karim.svg" alt="QR Code" class="qr" />
   </div>
 
-  <!-- BACK -->
+  <!-- BACK (Page 2) -->
   <div class="card back">
     <div class="name">KARIM NOUI</div>
     <div class="title">President</div>
