@@ -2,204 +2,122 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Karim Noui – Tet 2026 Business Card (Print)</title>
+  <title>KARIM NOUI – TET 2026 Business Card (Print)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <style>
-    /* =========================
-       PRINT SETUP
-       1 page = 1 side of card
-       ========================= */
     @page {
       size: 85mm 54mm;
       margin: 0;
     }
 
-    :root{
-      /* Tet 2026 palette */
-      --red: #C40000;         /* vivid but deep red */
-      --gold: #D6B46A;        /* champagne gold preview */
-      --gold-soft: rgba(214,180,106,0.20);
-      --gold-faint: rgba(214,180,106,0.08);
-    }
-
-    html, body { height: 100%; }
-
-    body{
+    body {
       margin: 0;
-      padding: 0;
-      background: #111;  /* preview only */
-      font-family: "Inter", Arial, sans-serif;
+      background: #111;
+      font-family: "Playfair Display", serif;
     }
 
-    /* Card base: exact finished size */
-    .card{
+    .page {
       width: 85mm;
       height: 54mm;
-      background: var(--red);
-      box-sizing: border-box;
-      overflow: hidden;
-      position: relative;
-
-      /* preview center on screen (won't affect printing because @media print resets) */
-      margin: 24px auto;
-      border-radius: 3mm;
-    }
-
-    /* ---------- FRONT (PAGE 1) ---------- */
-    .front{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      /* force next page for back side */
       page-break-after: always;
-      break-after: page;
+      position: relative;
+      overflow: hidden;
     }
 
-    /* Subtle "aura" background using your 2026 artwork (very faint) */
-    .front::before{
-      content:"";
-      position: absolute;
-      inset: -6mm; /* slight oversize to avoid edge gaps */
-      background-image: url("./assets/tet-2026.png"); /* <-- put your 2026 image here */
+    /* ======================
+       FRONT – QR SIDE
+    ====================== */
+    .front {
+      background-color: #c40000;
+      background-image:
+        url("https://retail-academy.github.io/karim-profile/assets/tet-2026.png");
       background-size: cover;
       background-position: center;
-      opacity: 0.08;            /* 6–8% recommended */
-      mix-blend-mode: soft-light;/* keeps it luxurious on vivid red */
-      pointer-events: none;
-      filter: saturate(1.05) contrast(1.05);
     }
 
-    /* Optional subtle vignette to add depth */
-    .front::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background: radial-gradient(circle at center,
-        rgba(0,0,0,0.00) 0%,
-        rgba(0,0,0,0.10) 55%,
-        rgba(0,0,0,0.18) 100%);
-      pointer-events: none;
+    .qr-wrapper {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    /* QR */
-    .qr{
+    .qr {
       width: 32mm;
       height: 32mm;
-      position: relative;
-      z-index: 2;
-      /* if your QR is transparent, add a tiny contrast halo to keep scanable on red */
-      background: transparent;
-      border-radius: 1.2mm;
+      background: #ffffff;
+      padding: 4mm;
+      border-radius: 4mm;
     }
 
-    /* ---------- BACK (PAGE 2) ---------- */
-    .back{
-      color: var(--gold);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      align-items: flex-end;
-      text-align: right;
-      padding: 12mm 10mm;
-
-      /* optional faint horse texture */
-    }
-
-    .back::before{
-      content:"";
-      position: absolute;
-      inset: -6mm;
-      background-image: url("./assets/horse-2026.png"); /* <-- put your Horse 2026 image here */
+    /* ======================
+       BACK – TEXT SIDE
+    ====================== */
+    .back {
+      background-color: #c40000;
+      background-image:
+        url("https://retail-academy.github.io/karim-profile/assets/horse-2026.png");
       background-size: cover;
       background-position: center;
-      opacity: 0.06;            /* very subtle */
-      mix-blend-mode: soft-light;
-      pointer-events: none;
-      filter: saturate(1.05) contrast(1.05);
+      color: #d6b46a;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    /* minimal vignette for depth */
-    .back::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background: radial-gradient(circle at 70% 60%,
-        rgba(0,0,0,0.00) 0%,
-        rgba(0,0,0,0.10) 60%,
-        rgba(0,0,0,0.18) 100%);
-      pointer-events: none;
+    .text {
+      background: rgba(196, 0, 0, 0.85);
+      padding: 8mm 6mm;
     }
 
-    .text-block{
-      position: relative;
-      z-index: 2;
-    }
-
-    .name{
-      font-family: "Playfair Display", serif;
-      font-size: 10pt;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      margin: 0 0 2mm 0;
-      line-height: 1.05;
-    }
-
-    .title{
-      font-size: 6.6pt;
-      font-weight: 300;
-      letter-spacing: 0.06em;
-      margin: 0 0 1.6mm 0;
-      line-height: 1.2;
-    }
-
-    .company{
-      font-size: 6.1pt;
-      font-weight: 300;
-      letter-spacing: 0.04em;
-      opacity: 0.95;
-      margin: 0;
-      line-height: 1.25;
-    }
-
-    /* Optional micro-line (keep or delete) */
-    .micro{
-      margin-top: 4mm;
-      font-size: 5.5pt;
+    .name {
+      font-size: 14pt;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      opacity: 0.85;
+      margin-bottom: 2mm;
     }
 
-    /* ---------- PRINT: remove preview-only styling ---------- */
-    @media print{
-      body{ background: transparent; }
-      .card{
-        margin: 0;
-        border-radius: 0; /* printers ignore rounded corners; cutting defines radius */
-      }
+    .title {
+      font-size: 9pt;
+      margin-bottom: 1mm;
+    }
+
+    .company {
+      font-size: 8pt;
+      margin-bottom: 4mm;
+    }
+
+    .year {
+      font-size: 7pt;
+      letter-spacing: 0.2em;
+      opacity: 0.9;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- FRONT (Page 1): Red + Gold QR + subtle 2026 aura -->
-  <div class="card front">
-    <!-- Use a gold-on-transparent QR SVG for printing -->
-    <img src="./assets/qr-karim.svg" alt="QR Code" class="qr" />
+  <!-- FRONT -->
+  <div class="page front">
+    <div class="qr-wrapper">
+      <img
+        src="https://retail-academy.github.io/karim-profile/assets/qr-karim.svg"
+        alt="QR Code"
+        class="qr"
+      />
+    </div>
   </div>
 
-  <!-- BACK (Page 2): Identity in gold + subtle horse aura -->
-  <div class="card back">
-    <div class="text-block">
-      <div class="name">KARIM NOUI</div>
+  <!-- BACK -->
+  <div class="page back">
+    <div class="text">
+      <div class="name">Karim Noui</div>
       <div class="title">President</div>
       <div class="company">Nguyen Kim – Central Retail Vietnam</div>
-
-      <!-- Optional (remove if you want absolute minimal) -->
-      <div class="micro">2026 · Year of the Horse</div>
+      <div class="year">2026 · YEAR OF THE HORSE</div>
     </div>
   </div>
 
