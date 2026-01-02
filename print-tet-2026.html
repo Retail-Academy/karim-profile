@@ -2,122 +2,209 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>KARIM NOUI – TET 2026 Business Card (Print)</title>
+  <title>KARIM NOUI – Tet 2026 Business Card (Red Lacquer / Gold Foil)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <!-- Optional: elegant serif for name (safe fallback if blocked) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
   <style>
-    @page {
-      size: 85mm 54mm;
-      margin: 0;
+    /* =========================
+       PRINT SETUP
+       1 page = 1 side (85×54mm)
+       ========================= */
+    @page { size: 85mm 54mm; margin: 0; }
+
+    :root{
+      --red: #9B0000;          /* lacquer red (print-friendly) */
+      --red-deep: #7C0000;     /* shadow red */
+      --gold: #D6B46A;         /* foil preview */
+      --gold-soft: #E6C77A;    /* softer text gold */
+      --ink: rgba(0,0,0,0.35);
     }
 
-    body {
+    html, body { height: 100%; }
+
+    body{
       margin: 0;
-      background: #111;
-      font-family: "Playfair Display", serif;
+      background: #111; /* preview only */
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
     }
 
-    .page {
+    /* Card page (exact size) */
+    .page{
       width: 85mm;
       height: 54mm;
-      page-break-after: always;
       position: relative;
       overflow: hidden;
+      box-sizing: border-box;
+
+      /* preview center */
+      margin: 24px auto;
+      border-radius: 3mm;
+
+      /* force 2 pages in print */
+      page-break-after: always;
+      break-after: page;
     }
 
-    /* ======================
-       FRONT – QR SIDE
-    ====================== */
-    .front {
-      background-color: #c40000;
+    /* =========================
+       RED LACQUER MATERIAL (no images)
+       ========================= */
+    .lacquer{
+      background:
+        /* soft vignette depth */
+        radial-gradient(120% 120% at 50% 40%, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.00) 55%),
+        radial-gradient(140% 140% at 20% 20%, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.00) 55%),
+        radial-gradient(140% 140% at 80% 80%, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.00) 55%),
+        /* lacquer sheen */
+        linear-gradient(145deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.00) 38%, rgba(0,0,0,0.12) 100%),
+        /* base */
+        linear-gradient(180deg, var(--red) 0%, #8E0000 60%, var(--red-deep) 100%);
+    }
+
+    /* micro grain */
+    .lacquer::before{
+      content:"";
+      position:absolute;
+      inset:0;
       background-image:
-        url("https://retail-academy.github.io/karim-profile/assets/tet-2026.png");
-      background-size: cover;
-      background-position: center;
+        radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1.5px),
+        radial-gradient(rgba(0,0,0,0.06) 1px, transparent 1.5px);
+      background-size: 8px 8px, 11px 11px;
+      background-position: 0 0, 3px 5px;
+      opacity: 0.18;
+      mix-blend-mode: overlay;
+      pointer-events:none;
     }
 
-    .qr-wrapper {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    /* =========================
+       FRONT (QR + Seal)
+       ========================= */
+    .front{
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
 
-    .qr {
+    /* QR container (NO white sticker) */
+    .qr{
       width: 32mm;
       height: 32mm;
-      background: #ffffff;
-      padding: 4mm;
-      border-radius: 4mm;
+      position: relative;
+      z-index: 2;
+      /* tiny shadow for screen preview only */
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.35));
     }
 
-    /* ======================
-       BACK – TEXT SIDE
-    ====================== */
-    .back {
-      background-color: #c40000;
-      background-image:
-        url("https://retail-academy.github.io/karim-profile/assets/horse-2026.png");
-      background-size: cover;
-      background-position: center;
-      color: #d6b46a;
-      text-align: center;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    /* Square seal "2026" bottom-right */
+    .seal{
+      position:absolute;
+      right: 6mm;
+      bottom: 6mm;
+      width: 12mm;
+      height: 12mm;
+      border: 0.35mm solid rgba(214,180,106,0.8);
+      box-sizing: border-box;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index: 3;
+      background: rgba(0,0,0,0.06);
+      backdrop-filter: blur(1px);
     }
 
-    .text {
-      background: rgba(196, 0, 0, 0.85);
-      padding: 8mm 6mm;
+    .seal span{
+      font-family: "Playfair Display", serif;
+      font-size: 7.5pt;
+      letter-spacing: 0.12em;
+      color: rgba(214,180,106,0.92);
+      transform: translateX(0.2mm);
     }
 
-    .name {
-      font-size: 14pt;
-      letter-spacing: 0.18em;
+    /* =========================
+       BACK (Identity lower-center)
+       ========================= */
+    .back{
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+      padding: 0 8mm 9mm; /* lower-center */
+      text-align:center;
+      color: var(--gold-soft);
+    }
+
+    .identity{
+      position: relative;
+      z-index: 2;
+    }
+
+    .name{
+      font-family: "Playfair Display", serif;
+      font-size: 11pt;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
-      margin-bottom: 2mm;
+      color: var(--gold);
+      margin: 0 0 2mm 0;
+      line-height: 1.05;
     }
 
-    .title {
-      font-size: 9pt;
-      margin-bottom: 1mm;
-    }
-
-    .company {
-      font-size: 8pt;
-      margin-bottom: 4mm;
-    }
-
-    .year {
+    .title{
       font-size: 7pt;
-      letter-spacing: 0.2em;
-      opacity: 0.9;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      margin: 0 0 1.6mm 0;
+      opacity: 0.95;
+    }
+
+    .company{
+      font-size: 6.3pt;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      margin: 0;
+      opacity: 0.92;
+    }
+
+    /* a very subtle divider dot (optional but classy) */
+    .dotline{
+      margin: 3.2mm auto 0;
+      width: 18mm;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(214,180,106,0.55), transparent);
+      opacity: 0.85;
+    }
+
+    /* Print: remove preview-only bits */
+    @media print{
+      body{ background: transparent; }
+      .page{ margin: 0; border-radius: 0; }
+      .qr{ filter: none; } /* printers don't need this */
     }
   </style>
 </head>
 
 <body>
 
-  <!-- FRONT -->
-  <div class="page front">
-    <div class="qr-wrapper">
-      <img
-        src="https://retail-academy.github.io/karim-profile/assets/qr-karim.svg"
-        alt="QR Code"
-        class="qr"
-      />
-    </div>
+  <!-- FRONT (Page 1): Red lacquer + Gold QR + Square Seal 2026 -->
+  <div class="page lacquer front">
+    <!-- IMPORTANT:
+      Replace qr-karim.svg with a GOLD QR SVG for print (recommended).
+      For now it will show whatever svg you have.
+    -->
+    <img class="qr" src="https://retail-academy.github.io/karim-profile/assets/qr-karim.svg" alt="QR Code">
+
+    <div class="seal"><span>2026</span></div>
   </div>
 
-  <!-- BACK -->
-  <div class="page back">
-    <div class="text">
-      <div class="name">Karim Noui</div>
+  <!-- BACK (Page 2): Lower-center identity -->
+  <div class="page lacquer back">
+    <div class="identity">
+      <div class="name">KARIM NOUI</div>
       <div class="title">President</div>
       <div class="company">Nguyen Kim – Central Retail Vietnam</div>
-      <div class="year">2026 · YEAR OF THE HORSE</div>
+      <div class="dotline"></div>
     </div>
   </div>
 
