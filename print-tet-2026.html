@@ -17,8 +17,9 @@
     :root{
       --gold: #D6B46A;
       --gold-soft: #E6C77A;
-      --paper: #F7F4EC; /* warm off-white for QR panel */
-      --ink: #111111;
+      --paper: #F7F4EC;        /* warm off-white for QR panel */
+      --red: #9B0000;          /* lacquer red */
+      --red-deep: #7C0000;     /* shadow red */
     }
 
     html, body { height: 100%; }
@@ -46,7 +47,40 @@
       break-after: page;
     }
 
-    /* Full-bleed image as “art-object” */
+    /* ===== Red lacquer base (no image) ===== */
+    .lacquer{
+      background:
+        radial-gradient(120% 120% at 50% 35%, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.00) 55%),
+        radial-gradient(140% 140% at 18% 18%, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.00) 55%),
+        radial-gradient(140% 140% at 82% 82%, rgba(0,0,0,0.22) 0%, rgba(0,0,0,0.00) 55%),
+        linear-gradient(145deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.00) 38%, rgba(0,0,0,0.12) 100%),
+        linear-gradient(180deg, var(--red) 0%, #8E0000 60%, var(--red-deep) 100%);
+    }
+
+    /* micro grain */
+    .lacquer::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image:
+        radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1.6px),
+        radial-gradient(rgba(0,0,0,0.06) 1px, transparent 1.6px);
+      background-size: 8px 8px, 11px 11px;
+      background-position: 0 0, 3px 5px;
+      opacity: 0.18;
+      mix-blend-mode: overlay;
+      pointer-events:none;
+    }
+
+    /* Optional subtle vignette */
+    .vignette{
+      position:absolute;
+      inset:0;
+      background: radial-gradient(120% 120% at 50% 45%, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.10) 55%, rgba(0,0,0,0.24) 100%);
+      pointer-events:none;
+    }
+
+    /* Full-bleed image layer (for horse only) */
     .bg{
       position:absolute;
       inset:0;
@@ -56,35 +90,48 @@
       transform: translateZ(0);
     }
 
-    /* ===== FRONT: Horse full-bleed (no text, no QR) ===== */
+    /* ===== FRONT: Red lacquer + Horse full-bleed ===== */
+    .front{
+      background: none;
+    }
+    .front .base{
+      position:absolute; inset:0;
+    }
     .front .bg{
-      /* Use your new horse image (absolute URL) */
       background-image: url("https://retail-academy.github.io/karim-profile/assets/horse-2026.png");
-      /* Keep it crisp: prefer cover; adjust if needed */
       background-position: 62% 52%;
     }
 
-    /* subtle vignette to “frame” the art (doesn't wash colors) */
-    .vignette{
+    /* ===== BACK: Red lacquer + 2026 (half width) + BIG QR + clearer identity ===== */
+    .back{
+      background: none;
+    }
+    .back .base{
+      position:absolute; inset:0;
+    }
+
+    /* 2026 image (about half card width), above identity text */
+    .back .year{
       position:absolute;
-      inset:0;
-      background:
-        radial-gradient(120% 120% at 50% 45%, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.10) 55%, rgba(0,0,0,0.24) 100%);
+      left: 6mm;
+      bottom: 22mm;            /* sits above identity */
+      width: 42mm;             /* ~half of 85mm */
+      height: auto;
+      z-index: 3;
       pointer-events:none;
     }
-
-    /* ===== BACK: 2026 full-bleed + BIG QR ===== */
-    .back .bg{
-      background-image: url("https://retail-academy.github.io/karim-profile/assets/tet-2026.png");
-      background-position: 50% 45%;
+    .back .year img{
+      width: 100%;
+      height: auto;
+      display:block;
     }
 
-    /* Big QR panel (scan-safe, clean, still luxury) */
+    /* Big QR panel (scan-safe, clean) */
     .qr-panel{
       position:absolute;
       right: 5.5mm;
-      bottom: 5.5mm;
-      width: 30mm;   /* BIG + easy scan */
+      bottom: 8mm;
+      width: 30mm;
       height: 30mm;
       background: var(--paper);
       border-radius: 3.6mm;
@@ -97,100 +144,85 @@
       padding: 2.6mm;
       z-index: 5;
     }
-
     .qr-panel img{
       width: 100%;
       height: 100%;
       display:block;
     }
 
-    /* Minimal identity line (straightforward, readable) */
+    /* Identity (larger, clearer, "straight") */
     .idline{
       position:absolute;
       left: 6mm;
-      bottom: 6.2mm;
+      bottom: 7.5mm;
       z-index: 6;
-      color: rgba(255,255,255,0.92);
+      color: rgba(255,255,255,0.95);
       text-shadow: 0 1px 10px rgba(0,0,0,0.35);
       max-width: calc(85mm - 6mm - 5.5mm - 30mm - 6mm);
     }
 
     .idline .name{
-      font-size: 8.6pt;
+      font-size: 10.5pt;       /* larger */
       font-weight: 700;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      margin: 0 0 1.2mm 0;
+      margin: 0 0 1.3mm 0;
       line-height: 1.05;
     }
 
     .idline .role{
-      font-size: 7.2pt;
+      font-size: 9pt;          /* larger */
       font-weight: 600;
       margin: 0;
       opacity: 0.95;
-      line-height: 1.2;
+      line-height: 1.15;
     }
 
     .idline .org{
-      font-size: 6.6pt;
+      font-size: 8.4pt;        /* larger */
       font-weight: 400;
-      margin: 0.8mm 0 0 0;
-      opacity: 0.9;
-      line-height: 1.2;
-    }
-
-    /* Optional: micro “2026” seal on back (tiny, not decorative-heavy) */
-    .seal{
-      position:absolute;
-      left: 6mm;
-      top: 5.5mm;
-      width: 10.5mm;
-      height: 10.5mm;
-      border: 0.35mm solid rgba(214,180,106,0.80);
-      background: rgba(0,0,0,0.10);
-      color: rgba(214,180,106,0.95);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight: 700;
-      font-size: 7pt;
-      letter-spacing: 0.10em;
-      z-index: 6;
+      margin: 1mm 0 0 0;
+      opacity: 0.92;
+      line-height: 1.15;
     }
 
     /* Print: remove preview-only styling */
     @media print{
       body{ background: transparent; }
       .page{ margin: 0; border-radius: 0; box-shadow: none; }
-      .qr-panel{ box-shadow: none; } /* optional */
+      .qr-panel{ box-shadow: none; }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- FRONT (Page 1): Art-only horse -->
+  <!-- FRONT (Page 1): Red lacquer + Horse art -->
   <div class="page front">
+    <div class="base lacquer" aria-hidden="true"></div>
     <div class="bg" aria-hidden="true"></div>
     <div class="vignette" aria-hidden="true"></div>
   </div>
 
-  <!-- BACK (Page 2): Art-only 2026 + BIG QR + minimal identity -->
+  <!-- BACK (Page 2): Red lacquer + 2026 (half width) + BIG QR + identity -->
   <div class="page back">
-    <div class="bg" aria-hidden="true"></div>
+    <div class="base lacquer" aria-hidden="true"></div>
     <div class="vignette" aria-hidden="true"></div>
 
-    <div class="seal">2026</div>
+    <!-- 2026 image -->
+    <div class="year" aria-hidden="true">
+      <img src="https://retail-academy.github.io/karim-profile/assets/tet-2026.png" alt="" />
+    </div>
 
+    <!-- Identity (no Central Retail) -->
     <div class="idline">
       <p class="name">KARIM NOUI</p>
       <p class="role">President</p>
-      <p class="org">Nguyen Kim – Central Retail Vietnam</p>
+      <p class="org">Nguyen Kim, Vietnam</p>
     </div>
 
+    <!-- Big QR -->
     <div class="qr-panel" aria-label="Scan QR to connect">
-      <!-- QR SVG (absolute URL). If you later upload a gold-optimized SVG, just replace the filename. -->
       <img src="https://retail-academy.github.io/karim-profile/assets/qr-karim.svg" alt="QR Code" />
     </div>
   </div>
