@@ -58,13 +58,11 @@
     }
 
     .avatar-wrap {
-      position: relative;
       width: 80px;
       height: 80px;
       border-radius: 50%;
       padding: 2px;
       background: radial-gradient(circle at top, #f7e0ac, #b3873c);
-      flex-shrink: 0;
       overflow: hidden;
     }
 
@@ -80,10 +78,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transform: translateY(-2px);
     }
-
-    .name-block { flex: 1; min-width: 0; }
 
     .name {
       font-family: "Playfair Display", serif;
@@ -95,7 +90,6 @@
 
     .title {
       font-size: 13px;
-      line-height: 1.4;
       color: var(--gold-soft);
       text-transform: uppercase;
       letter-spacing: 0.16em;
@@ -115,8 +109,7 @@
 
     .info-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1fr);
-      gap: 8px;
+      gap: 10px;
       margin-bottom: 14px;
       font-size: 13px;
       color: var(--text-soft);
@@ -130,160 +123,157 @@
       margin-bottom: 2px;
     }
 
-    .info-value { font-size: 13px; word-break: break-word; }
-
-    .info-link a {
+    .info-value a {
       color: var(--gold-soft);
       text-decoration: none;
     }
-    .info-link a:hover { text-decoration: underline; }
+
+    .info-value a:hover {
+      text-decoration: underline;
+    }
+
+    /* Credential styling */
+    .credential-card {
+      margin-top: 6px;
+      padding: 12px 13px;
+      border-radius: 16px;
+      background: linear-gradient(145deg, rgba(214,180,106,0.12), rgba(255,255,255,0.025));
+      border: 1px solid rgba(214,180,106,0.32);
+    }
+
+    .credential-title {
+      font-size: 13px;
+      line-height: 1.35;
+      color: var(--text-main);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .credential-meta {
+      font-size: 11px;
+      color: var(--gold-soft);
+      margin-bottom: 6px;
+    }
+
+    .credential-card a {
+      font-size: 12px;
+      color: var(--gold-soft);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .credential-card a:hover {
+      text-decoration: underline;
+    }
 
     .btn-row {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 8px;
       margin-bottom: 10px;
     }
 
     .btn {
       border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      padding: 10px 12px;
+      padding: 10px;
       font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
+      text-align: center;
       text-decoration: none;
-      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, background 0.12s ease-out;
-      white-space: nowrap;
+      cursor: pointer;
     }
 
     .btn-primary {
       background: radial-gradient(circle at top, #f7e0ac 0, #d2a958 40%, #8b6328 80%);
       color: #1b1206;
-      box-shadow: 0 8px 22px rgba(0,0,0,0.55);
     }
 
     .btn-secondary {
-      background: rgba(255,255,255,0.02);
-      color: var(--gold-soft);
       border: 1px solid rgba(230,186,114,0.4);
-      box-shadow: 0 8px 22px rgba(0,0,0,0.4);
+      color: var(--gold-soft);
     }
 
-    .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.7);
-    }
-
-    .btn:active {
-      transform: translateY(1px) scale(0.99);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-    }
-
-    .btn span.icon { font-size: 14px; }
-
-    .footer {
-      margin-top: 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 10px;
-      color: rgba(200,200,214,0.7);
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-    }
-
-    @media (max-width: 480px) {
-      .card { padding: 18px 16px 14px; }
-      .name { font-size: 20px; }
-      .btn-row { grid-template-columns: minmax(0, 1fr); }
-    }
   </style>
 </head>
+
 <body>
 
-  <div class="card-shell">
-    <div class="card">
-      <div class="top-row">
-        <div class="avatar-wrap">
-          <div class="avatar-inner">
-            <!-- Ảnh profile của Karim -->
-            <img src="https://raw.githubusercontent.com/Retail-Academy/karim-profile/main/Mr.%20Karim%20Profile%20Pic.jpg" alt="Karim Noui" />
-          </div>
-        </div>
-        <div class="name-block">
-          <div class="name">Karim Noui</div>
-          <div class="title">President</div>
-          <div class="company">Nguyen Kim – Central Retail Vietnam</div>
+<div class="card-shell">
+  <div class="card">
+
+    <div class="top-row">
+      <div class="avatar-wrap">
+        <div class="avatar-inner">
+          <img src="https://raw.githubusercontent.com/Retail-Academy/karim-profile/main/Mr.%20Karim%20Profile%20Pic.jpg" alt="Karim Noui"/>
         </div>
       </div>
-
-      <div class="divider"></div>
-
-      <div class="info-grid">
-        <div>
-          <div class="info-label">Mobile</div>
-          <div class="info-value info-link">
-            <a href="tel:+84916027887">(+84) 916 027 887</a>
-          </div>
-        </div>
-        <div>
-          <div class="info-label">Email – Work</div>
-          <div class="info-value info-link">
-            <a href="mailto:karim.noui@vn.centralretail.com">karim.noui@vn.centralretail.com</a>
-          </div>
-        </div>
-        <div>
-          <div class="info-label">Email – Personal</div>
-          <div class="info-value info-link">
-            <a href="mailto:k.noui@outlook.com">k.noui@outlook.com</a>
-          </div>
-        </div>
-        <div>
-          <div class="info-label">LinkedIn</div>
-          <div class="info-value info-link">
-            <a href="https://www.linkedin.com/in/karim-noui-818aaa/" target="_blank" rel="noopener">
-              linkedin.com/in/karim-noui-818aaa
-            </a>
-          </div>
-        </div>
-        <div>
-          <div class="info-label">Leadership Profile</div>
-          <div class="info-value info-link">
-            <a href="https://retail-academy.github.io/karim-profile/" target="_blank" rel="noopener">
-              retail-academy.github.io/karim-profile
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="btn-row">
-        <a class="btn btn-primary" href="tel:+84916027887">
-          <span class="icon">📞</span><span>Call</span>
-        </a>
-        <a class="btn btn-secondary" href="mailto:karim.noui@vn.centralretail.com">
-          <span class="icon">✉️</span><span>Email</span>
-        </a>
-        <a class="btn btn-secondary" href="https://www.linkedin.com/in/karim-noui-818aaa/" target="_blank" rel="noopener">
-          <span class="icon">🔗</span><span>LinkedIn</span>
-        </a>
-        <a class="btn btn-secondary" href="karim-contact.vcf">
-          <span class="icon">💾</span><span>Save Contact</span>
-        </a>
-      </div>
-
-      <div class="footer">
-        <div>Leadership & Transformation</div>
-        <div>Scan QR or tap to connect</div>
+      <div>
+        <div class="name">Karim Noui</div>
+        <div class="title">President</div>
+        <div class="company">Nguyen Kim – Central Retail Vietnam</div>
       </div>
     </div>
+
+    <div class="divider"></div>
+
+    <div class="info-grid">
+
+      <div>
+        <div class="info-label">Mobile</div>
+        <div class="info-value">
+          <a href="tel:+84916027887">(+84) 916 027 887</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="info-label">Email</div>
+        <div class="info-value">
+          <a href="mailto:karim.noui@vn.centralretail.com">karim.noui@vn.centralretail.com</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="info-label">LinkedIn</div>
+        <div class="info-value">
+          <a href="https://www.linkedin.com/in/karim-noui-818aaa/" target="_blank">
+            linkedin.com/in/karim-noui-818aaa
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div class="info-label">Leadership Profile</div>
+        <div class="info-value">
+          <a href="https://retail-academy.github.io/karim-profile/" target="_blank">
+            retail-academy.github.io/karim-profile
+          </a>
+        </div>
+      </div>
+
+      <!-- UPDATED CREDENTIAL -->
+      <div class="credential-card">
+        <div class="info-label">Continuous Leadership Development</div>
+        <div class="credential-title">
+          Applied Agentic AI for Organizational Transformation
+        </div>
+        <div class="credential-meta">
+          MIT Professional Education · AI · Transformation
+        </div>
+        <a href="https://www.credential.net/066121eb-3917-4d8a-ab3e-26f526bdae2e#acc.IiJchvLy" target="_blank">
+          View Certificate
+        </a>
+      </div>
+
+    </div>
+
+    <div class="btn-row">
+      <a class="btn btn-primary" href="tel:+84916027887">Call</a>
+      <a class="btn btn-secondary" href="mailto:karim.noui@vn.centralretail.com">Email</a>
+      <a class="btn btn-secondary" href="https://www.linkedin.com/in/karim-noui-818aaa/" target="_blank">LinkedIn</a>
+      <a class="btn btn-secondary" href="karim-contact.vcf">Save Contact</a>
+    </div>
+
   </div>
+</div>
 
 </body>
 </html>
